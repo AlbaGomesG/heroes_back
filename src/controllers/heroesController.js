@@ -22,4 +22,14 @@ const getHero = async (req, res) => {
     }
 };
 
-module.exports = {getAllHeroes, getHero};
+const createHero = async (req, res) => {
+    try {
+        const { name, publisher_id } = req.body;
+        const newHero = await heroesModel.createHero(name, publisher_id);
+        res.status(201).json(newHero);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao criar herói!"});
+    }
+};
+
+module.exports = {getAllHeroes, getHero, createHero};
