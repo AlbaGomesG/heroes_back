@@ -1,0 +1,18 @@
+const pool = require("../config/database.js");
+
+const getHeroes = async (name) => {
+    if (!name) {
+        const result = await pool.query(`SELECT heroes.*, publishers.name AS publisher_name
+            FROM heroes
+            LEFT JOIN publishers ON heroes.publisher_id = publishers.id`);
+            return result.rows;
+    } else {
+        const result = await pool.query(`SELECT heroes.*, publishers.name AS publisher_name
+            FROM heroes
+            LEFT JOIN publishers ON heroes.publisher_id = publishers.id
+            WHERE heroes.name ILIKE $1`, [`%${name}%`]);
+            return result.rows;
+    }
+};
+
+module.exports = {getHeroes};
