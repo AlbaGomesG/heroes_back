@@ -15,4 +15,12 @@ const getHeroes = async (name) => {
     }
 };
 
-module.exports = {getHeroes};
+const getHeroById = async (id) => {
+    const result = await pool.query(`SELECT heroes.*, publishers.name AS publisher_name
+        FROM heroes
+        LEFT JOIN publishers ON heroes.publisher_id = publishers.id
+        WHERE heroes.id = $1`, [id]);
+        return result.rows[0];
+};
+
+module.exports = {getHeroes, getHeroById};

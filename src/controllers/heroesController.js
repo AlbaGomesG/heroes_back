@@ -10,4 +10,16 @@ const getAllHeroes = async (req, res) => {
     }
 };
 
-module.exports = {getAllHeroes};
+const getHero = async (req, res) => {
+    try {
+        const hero = await heroesModel.getHeroById(req.params.id);
+        if (!hero) {
+            return res.status(404).json({ message: "Herói não encontrado!"});
+        }
+        res.json(hero);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar Herói!"});
+    }
+};
+
+module.exports = {getAllHeroes, getHero};
