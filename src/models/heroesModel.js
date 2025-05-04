@@ -28,4 +28,9 @@ const createHero = async (name, publisher_id) => {
     return result.rows[0];
 };
 
-module.exports = {getHeroes, getHeroById, createHero};
+const updateHero = async (id, name, publisher_id) => {
+    const result = await pool.query("UPDATE heroes SET name = $1, publisher_id = $2 WHERE id = $3 RETURNING *", [name, publisher_id, id]);
+    return result.rows[0];
+};
+
+module.exports = {getHeroes, getHeroById, createHero, updateHero};

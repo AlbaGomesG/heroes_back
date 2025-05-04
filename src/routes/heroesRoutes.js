@@ -5,5 +5,6 @@ const heroesController = require("../controllers/heroesController");
 router.get("/heroes", heroesController.getAllHeroes);
 router.get("/heroes/:id", heroesController.getHero);
 router.post("/heroes", heroesController.createHero);
+router.put("/heroes/:id", heroesController.updateHero);
 
 module.exports = router;

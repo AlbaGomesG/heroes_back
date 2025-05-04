@@ -32,4 +32,17 @@ const createHero = async (req, res) => {
     }
 };
 
-module.exports = {getAllHeroes, getHero, createHero};
+const updateHero = async (req, res) => {
+    try {
+        const { name, publisher_id } = req.body;
+        const updateHero = await heroesModel.updateHero(req.params.id, name, publisher_id);
+        if (!updateHero) {
+            return res.status(404).json({ message: "Herói não encontrado!"});
+        }
+        res.json(updateHero);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar herói!"});
+    }
+};
+
+module.exports = {getAllHeroes, getHero, createHero, updateHero};
