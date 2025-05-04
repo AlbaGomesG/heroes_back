@@ -45,4 +45,13 @@ const updateHero = async (req, res) => {
     }
 };
 
-module.exports = {getAllHeroes, getHero, createHero, updateHero};
+const deleteHero = async (req, res) => {
+    try{
+        const message = await heroesModel.deleteHero(req.params.id);
+        res.json(message);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao deletar herói!"});
+    }
+};
+
+module.exports = {getAllHeroes, getHero, createHero, updateHero, deleteHero};
