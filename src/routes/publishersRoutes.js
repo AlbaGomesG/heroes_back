@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const publishersController = require("../controllers/publishersController.js");
-const apiKeyMiddleware = require("../config/apiKey.js");
-
-router.use(apiKeyMiddleware);
 
 /**
  * @swagger
